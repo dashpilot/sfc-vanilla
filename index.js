@@ -9,9 +9,11 @@ function compile(mypath) {
   data.script = "";
   data.style = "";
   data.template = {};
+  data.imports = {};
 
   const folder = mypath;
-  let files = fs.readdirSync(folder);
+  // let files = fs.readdirSync(folder);
+  let files = fs.readdirSync("./src").filter((f) => f.includes(".html"));
   let i = 0;
   files.forEach(function (file) {
     extractTags(folder + file, data);
@@ -42,6 +44,11 @@ function extractTags(filepath, data) {
   }
   if (root.querySelector("style")) {
     data.style += root.querySelector("style").text;
+  }
+  if (root.querySelector("imports")) {
+    data.imports[filename] = root
+      .querySelector("imports")
+      .text.replaceAll(".html", ".mjs");
   }
 }
 
