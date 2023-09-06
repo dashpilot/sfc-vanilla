@@ -13,7 +13,7 @@ function compile(mypath) {
 
   const folder = mypath;
   // let files = fs.readdirSync(folder);
-  let files = fs.readdirSync("./src").filter((f) => f.includes(".html"));
+  let files = fs.readdirSync(folder).filter((f) => f.includes(".html"));
   let i = 0;
   files.forEach(function (file) {
     extractTags(folder + file, data);
